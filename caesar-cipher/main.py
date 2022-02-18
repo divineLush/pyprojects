@@ -24,11 +24,11 @@ def decrypt(n, txt):
 
 def score(str):
     e = (str.count("e") + str.count("E")) * 0.13
-    a = (str.count("a") + str.count("A")) * 0.82
-    i = (str.count("i") + str.count("I")) * 0.7
-    o = (str.count("o") + str.count("O")) * 0.75
-    u = (str.count("u") + str.count("U")) * 0.28
-    y = (str.count("y") + str.count("Y")) * 0.2
+    a = (str.count("a") + str.count("A")) * 0.082
+    i = (str.count("i") + str.count("I")) * 0.07
+    o = (str.count("o") + str.count("O")) * 0.075
+    u = (str.count("u") + str.count("U")) * 0.028
+    y = (str.count("y") + str.count("Y")) * 0.02
 
     return e + a + i + o + u + y
 
