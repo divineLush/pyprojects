@@ -31,11 +31,22 @@ def score(str):
     return e + a + i + o + u + y
 
 
-with open('test.txt') as f:
-    input = f.readline()
+with open("test.txt") as input_file:
+    first_line = input_file.readline()
 
-    dec = [decrypt(i, input) for i in range(1, 26)]
+    dec = [decrypt(i, first_line) for i in range(1, 26)]
     dec_sorted = sorted(dec, key=lambda x: score(x), reverse=True)
 
-    for entry in dec_sorted:
-        print(entry)
+    print("\n\npls choose the right output:\n\n")
+
+    for i in range(len(dec_sorted)):
+        print(f"{i}. {dec_sorted[i]}")
+
+
+    print("\n\n type smth from 0 to 24\n\n")
+    user_num = int(input()) - 1
+
+    with open("input.txt", "w") as output_file:
+        for line in input_file:
+            line_dec = decrypt(user_num, line)
+            output_file.write(line_dec + "\n")
