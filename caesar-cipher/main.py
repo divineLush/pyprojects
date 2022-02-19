@@ -1,5 +1,3 @@
-input = "Bpm acv eia apqvqvo wv bpm ami,"
-
 key_low = "abcdefghijklmnopqrstuvwxyz"
 key_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -33,8 +31,11 @@ def score(str):
     return e + a + i + o + u + y
 
 
-dec = [decrypt(i, input) for i in range(1, 26)]
-dec_sorted = sorted(dec, key=lambda x: score(x), reverse=True)
+with open('test.txt') as f:
+    input = f.readline()
 
-for entry in dec_sorted:
-    print(entry)
+    dec = [decrypt(i, input) for i in range(1, 26)]
+    dec_sorted = sorted(dec, key=lambda x: score(x), reverse=True)
+
+    for entry in dec_sorted:
+        print(entry)
