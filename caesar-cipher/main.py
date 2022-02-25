@@ -37,16 +37,18 @@ with open("test.txt") as input_file:
     dec = [decrypt(i, first_line) for i in range(1, 26)]
     dec_sorted = sorted(dec, key=lambda x: score(x), reverse=True)
 
+    print("wanna see full output or only first 3 entries? y/n")
+
     print("\n\npls choose the right output:\n\n")
 
     for i in range(len(dec_sorted)):
         print(f"{i}. {dec_sorted[i]}")
 
 
-    print("\n\n type smth from 0 to 24\n\n")
-    user_num = int(input()) - 1
+    # print("\n\n type smth from 0 to 24\n\n")
+    # user_num = int(input()) - 1
 
-    with open("input.txt", "w") as output_file:
-        for line in input_file:
-            line_dec = decrypt(user_num, line)
-            output_file.write(line_dec + "\n")
+    # with open("input.txt", "w") as output_file:
+    #     for line in input_file:
+    #         line_dec = decrypt(user_num, line)
+    #         output_file.write(line_dec + "\n")
