@@ -34,19 +34,16 @@ def score(str):
 with open("test.txt") as input_file:
     first_line = input_file.readline()
 
-    dec = [decrypt(i, first_line) for i in range(1, 26)]
-    dec_sorted = sorted(dec, key=lambda x: score(x), reverse=True)
+    dec = [(decrypt(i, first_line), i) for i in range(1, 27)]
+    dec_sorted = sorted(dec, key=lambda x: score(x[0]), reverse=True)
 
     print("wanna see full output? y/n")
     show_full = input()
 
-    print()
+    show_len = len(dec_sorted) if show_full == "y" else 4
 
-    show_len = len(dec_sorted) if show_full == "y" else 3
-
-    for i in range(1, show_len + 1):
-        print(f"{i}. {dec_sorted[i]}")
-
+    for i in range(1, show_len):
+        print(f"{i}. {dec_sorted[i][0]}")
 
     print("\npls choose the right output")
     print("type smth from 1 to 26:\n")
@@ -63,11 +60,11 @@ with open("test.txt") as input_file:
         except:
             print("wtf? try again")
 
-    print(decrypt(user_num, first_line))
-    # print(dec_sorted[user_num])
+    real_num = dec_sorted[user_num][1]
 
-    # with open("output.txt", "w") as output_file:
-    #     for line in input_file:
-    #         line_dec = decrypt(user_num, line)
-    #         print(line_dec)
-    #         output_file.write(line_dec + "\n")
+    with open("output.txt", "w") as output_file:
+        for line in input_file:
+            line_dec = decrypt(real_num, line)
+            output_file.write(line_dec + "\n")
+
+        print('now look at output.txt')
