@@ -1,0 +1,29 @@
+You are given a table of sequenced DNA for a set of patients. Positions in sequenced DNA segment are marked as either methylated (1) or not methylated (0).
+However methylation of DNA can vary for the same material from the same patient, e.g. first position can sometime be measured as methylated and sometimes not.
+For each patient we provide you with data of how many times we've encountered a particular methylation pattern.
+Each patient is also marked as a cancer patient (they have prefix
+p
+c
+n
+c
+r
+) or control group patient (they have prefix
+p
+c
+n
+t
+r
+l
+).
+
+Your task for now is simple:
+1. For each patient produce a dataframe with 20 variables - each containing a fraction of times a particular position in DNA was methylated;
+2. Also add 20 * 19 * 4 = 1520 variables for frequencies of how often two certain positions are set into pattern "11", "01", "10" or "00".
+3. Try to analyse whether cancer can be predicted from them. Method of analysis is up to you to chose and it is fine if you cannot find any way to predict cancer based on these variables.
+
+Simple example (for 3 places instead of 20):
+Certain patient has pattern "101" 23 times, pattern "110" 11 times and "010" 8 times.
+This means that frequency of first place is (23 + 11) / (23 + 11 + 8) = 0.81
+Frequency of second place is (11 + 8) / (23 + 11 + 8) = 0.45
+Frequency of third place is 23 / (23 + 11 + 8) = 0.55
+Double variable for methylated second place and non-methylated third place (pattern "*10") is (11 + 8) = 0.45
