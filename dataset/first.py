@@ -9,10 +9,15 @@ with open('data.csv', newline='') as csvfile:
     ln = len(data[0][0])
     res = [0] * ln
 
+    row_count = len(data)
+
     for row in data:
         for i in range(ln):
             if row[0][i] == '1':
                 res[i] += int(row[1])
+
+        for i in range(ln):
+            res[i] /= row_count
 
 
     with open('first_patient_output', 'w') as csvoutput:
