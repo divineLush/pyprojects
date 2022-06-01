@@ -7,24 +7,42 @@ first_col = data[data.columns[0]]
 ln = len(first_col[0])
 rn = range(ln)
 
+patient_names = data.iloc[0].index.values
 
 indexes = []
 for i in rn:
     for j in rn:
-        if i != j:
+        if i > j:
             indexes.append((i, j))
+
+global_res = pd.DataFrame()
+
+first_res_col = []
+for tuple in indexes:
+    str_tuple_0 = str(tuple[0])
+    str_tuple_1 = str(tuple[1])
+
+    first_res_col.append('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '00')
+    first_res_col.append('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '01')
+    first_res_col.append('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '10')
+    first_res_col.append('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '11')
+
+
+global_res['variables'] = first_res_col
 
 
 def calc_for_patient(i):
     patient_col = data[data.columns[i]]
+    patient_name = patient_names[i]
+    res = []
 
     for tuple in indexes:
         d00 = 0
         d01 = 0
         d10 = 0
         d11 = 0
-        print()
-        print(tuple)
+        # print()
+        # print(tuple)
         for j in range(len(first_col)):
             first = first_col[j][tuple[0]]
             second = first_col[j][tuple[1]]
@@ -53,10 +71,17 @@ def calc_for_patient(i):
         str_tuple_0 = str(tuple[0])
         str_tuple_1 = str(tuple[1])
 
-        print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '00: ' + str(d00))
-        print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '01: ' + str(d01))
-        print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '10: ' + str(d10))
-        print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '11: ' + str(d11))
+        res.append(str(d00))
+        res.append(str(d01))
+        res.append(str(d10))
+        res.append(str(d11))
+
+        # print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '00: ' + str(d00))
+        # print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '01: ' + str(d01))
+        # print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '10: ' + str(d10))
+        # print('c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '11: ' + str(d11))
+
+    global_res[patient_name] = res
 
         # res['c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '00'] = d00
         # res['c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '01'] = d01
@@ -64,7 +89,7 @@ def calc_for_patient(i):
         # res['c_' + str_tuple_0 + '_' + str_tuple_1 + '_' + '11'] = d11
 
 
-patients_count = len(data.columns) - 1
+for i in range(1, len(data.columns)):
+    calc_for_patient(i)
 
-# for i in range(1, patients_count):
-#     calc_for_patient(i)
+global_res.to_csv('second_result.csv')
