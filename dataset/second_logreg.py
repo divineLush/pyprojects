@@ -33,7 +33,7 @@ y_pred = logreg.predict(xtest)
 # [[True Positive, False Positive], [False Negative, True Negative]]
 cm = confusion_matrix(ytest, y_pred)
 print(cm)
-print ("Accuracy : ", accuracy_score(ytest, y_pred))
+print("Accuracy : ", accuracy_score(ytest, y_pred))
 
 print(xtest)
 print(y_pred)
